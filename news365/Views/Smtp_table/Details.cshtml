@@ -1,0 +1,74 @@
+﻿@model news365.Models.Smtp_table
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Smtp_table</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Smtp_protocol)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Smtp_protocol)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Smtp_host)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Smtp_host)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Smtp_port)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Smtp_port)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Smtp_username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Smtp_username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Smtp_password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Smtp_password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Smtp_mail_type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Smtp_mail_type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Smtp_charset)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Smtp_charset)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.smtp_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

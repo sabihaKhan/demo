@@ -1,0 +1,69 @@
+﻿@model IEnumerable<news365.Models.Smtp_table>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Smtp_protocol)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Smtp_host)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Smtp_port)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Smtp_username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Smtp_password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Smtp_mail_type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Smtp_charset)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Smtp_protocol)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Smtp_host)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Smtp_port)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Smtp_username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Smtp_password)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Smtp_mail_type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Smtp_charset)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.smtp_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.smtp_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.smtp_id })
+        </td>
+    </tr>
+}
+
+</table>

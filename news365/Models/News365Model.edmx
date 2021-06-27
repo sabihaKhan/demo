@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="news365Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CategoryTable">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ImageTable">
+          <Key>
+            <PropertyRef Name="Img_id" />
+          </Key>
+          <Property Name="Img_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Image" Type="nvarchar(max)" />
+          <Property Name="Text" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="NewsTable">
+          <Key>
+            <PropertyRef Name="NewsID" />
+          </Key>
+          <Property Name="NewsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Smtp_table">
+          <Key>
+            <PropertyRef Name="smtp_id" />
+          </Key>
+          <Property Name="smtp_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Smtp_protocol" Type="nvarchar" MaxLength="50" />
+          <Property Name="Smtp_host" Type="nvarchar" MaxLength="50" />
+          <Property Name="Smtp_port" Type="int" />
+          <Property Name="Smtp_username" Type="nvarchar" MaxLength="50" />
+          <Property Name="Smtp_password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Smtp_mail_type" Type="nvarchar" MaxLength="50" />
+          <Property Name="Smtp_charset" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_NewsTable_CategoryTable">
+          <End Role="CategoryTable" Type="Self.CategoryTable" Multiplicity="0..1" />
+          <End Role="NewsTable" Type="Self.NewsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryTable">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="NewsTable">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="news365ModelStoreContainer">
+          <EntitySet Name="CategoryTable" EntityType="Self.CategoryTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ImageTable" EntityType="Self.ImageTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewsTable" EntityType="Self.NewsTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Smtp_table" EntityType="Self.Smtp_table" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_NewsTable_CategoryTable" Association="Self.FK_NewsTable_CategoryTable">
+            <End Role="CategoryTable" EntitySet="CategoryTable" />
+            <End Role="NewsTable" EntitySet="NewsTable" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="news365Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Smtp_table">
+          <Key>
+            <PropertyRef Name="smtp_id" />
+          </Key>
+          <Property Name="smtp_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Smtp_protocol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Smtp_host" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Smtp_port" Type="Int32" />
+          <Property Name="Smtp_username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Smtp_password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Smtp_mail_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Smtp_charset" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="news365Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Smtp_table" EntityType="Self.Smtp_table" />
+          <EntitySet Name="ImageTables" EntityType="news365Model.ImageTable" />
+          <EntitySet Name="CategoryTables" EntityType="news365Model.CategoryTable" />
+          <EntitySet Name="NewsTables" EntityType="news365Model.NewsTable" />
+          <AssociationSet Name="FK_NewsTable_CategoryTable" Association="news365Model.FK_NewsTable_CategoryTable">
+            <End Role="CategoryTable" EntitySet="CategoryTables" />
+            <End Role="NewsTable" EntitySet="NewsTables" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ImageTable">
+          <Key>
+            <PropertyRef Name="Img_id" />
+          </Key>
+          <Property Name="Img_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Text" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CategoryTable">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="NewsTables" Relationship="news365Model.FK_NewsTable_CategoryTable" FromRole="CategoryTable" ToRole="NewsTable" />
+        </EntityType>
+        <EntityType Name="NewsTable">
+          <Key>
+            <PropertyRef Name="NewsID" />
+          </Key>
+          <Property Name="NewsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CategoryTable" Relationship="news365Model.FK_NewsTable_CategoryTable" FromRole="NewsTable" ToRole="CategoryTable" />
+        </EntityType>
+        <Association Name="FK_NewsTable_CategoryTable">
+          <End Type="news365Model.CategoryTable" Role="CategoryTable" Multiplicity="0..1" />
+          <End Type="news365Model.NewsTable" Role="NewsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryTable">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="NewsTable">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="news365ModelStoreContainer" CdmEntityContainer="news365Entities">
+          <EntitySetMapping Name="Smtp_table">
+            <EntityTypeMapping TypeName="news365Model.Smtp_table">
+              <MappingFragment StoreEntitySet="Smtp_table">
+                <ScalarProperty Name="smtp_id" ColumnName="smtp_id" />
+                <ScalarProperty Name="Smtp_protocol" ColumnName="Smtp_protocol" />
+                <ScalarProperty Name="Smtp_host" ColumnName="Smtp_host" />
+                <ScalarProperty Name="Smtp_port" ColumnName="Smtp_port" />
+                <ScalarProperty Name="Smtp_username" ColumnName="Smtp_username" />
+                <ScalarProperty Name="Smtp_password" ColumnName="Smtp_password" />
+                <ScalarProperty Name="Smtp_mail_type" ColumnName="Smtp_mail_type" />
+                <ScalarProperty Name="Smtp_charset" ColumnName="Smtp_charset" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ImageTables">
+            <EntityTypeMapping TypeName="news365Model.ImageTable">
+              <MappingFragment StoreEntitySet="ImageTable">
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Img_id" ColumnName="Img_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoryTables">
+            <EntityTypeMapping TypeName="news365Model.CategoryTable">
+              <MappingFragment StoreEntitySet="CategoryTable">
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NewsTables">
+            <EntityTypeMapping TypeName="news365Model.NewsTable">
+              <MappingFragment StoreEntitySet="NewsTable">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="NewsID" ColumnName="NewsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

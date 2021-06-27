@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="news365ModelStoreContainer" CdmEntityContainer="news365Entities">
+    <EntitySetMapping Name="Smtp_table">
+      <EntityTypeMapping TypeName="news365Model.Smtp_table">
+        <MappingFragment StoreEntitySet="Smtp_table">
+          <ScalarProperty Name="smtp_id" ColumnName="smtp_id" />
+          <ScalarProperty Name="Smtp_protocol" ColumnName="Smtp_protocol" />
+          <ScalarProperty Name="Smtp_host" ColumnName="Smtp_host" />
+          <ScalarProperty Name="Smtp_port" ColumnName="Smtp_port" />
+          <ScalarProperty Name="Smtp_username" ColumnName="Smtp_username" />
+          <ScalarProperty Name="Smtp_password" ColumnName="Smtp_password" />
+          <ScalarProperty Name="Smtp_mail_type" ColumnName="Smtp_mail_type" />
+          <ScalarProperty Name="Smtp_charset" ColumnName="Smtp_charset" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ImageTables">
+      <EntityTypeMapping TypeName="news365Model.ImageTable">
+        <MappingFragment StoreEntitySet="ImageTable">
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Img_id" ColumnName="Img_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CategoryTables">
+      <EntityTypeMapping TypeName="news365Model.CategoryTable">
+        <MappingFragment StoreEntitySet="CategoryTable">
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NewsTables">
+      <EntityTypeMapping TypeName="news365Model.NewsTable">
+        <MappingFragment StoreEntitySet="NewsTable">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="NewsID" ColumnName="NewsID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

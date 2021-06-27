@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="news365Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Smtp_table">
+    <Key>
+      <PropertyRef Name="smtp_id" />
+    </Key>
+    <Property Name="smtp_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Smtp_protocol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Smtp_host" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Smtp_port" Type="Int32" />
+    <Property Name="Smtp_username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Smtp_password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Smtp_mail_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Smtp_charset" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="news365Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Smtp_table" EntityType="Self.Smtp_table" />
+    <EntitySet Name="ImageTables" EntityType="news365Model.ImageTable" />
+    <EntitySet Name="CategoryTables" EntityType="news365Model.CategoryTable" />
+    <EntitySet Name="NewsTables" EntityType="news365Model.NewsTable" />
+    <AssociationSet Name="FK_NewsTable_CategoryTable" Association="news365Model.FK_NewsTable_CategoryTable">
+      <End Role="CategoryTable" EntitySet="CategoryTables" />
+      <End Role="NewsTable" EntitySet="NewsTables" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ImageTable">
+    <Key>
+      <PropertyRef Name="Img_id" />
+    </Key>
+    <Property Name="Img_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Text" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="CategoryTable">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="NewsTables" Relationship="news365Model.FK_NewsTable_CategoryTable" FromRole="CategoryTable" ToRole="NewsTable" />
+  </EntityType>
+  <EntityType Name="NewsTable">
+    <Key>
+      <PropertyRef Name="NewsID" />
+    </Key>
+    <Property Name="NewsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryID" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CategoryTable" Relationship="news365Model.FK_NewsTable_CategoryTable" FromRole="NewsTable" ToRole="CategoryTable" />
+  </EntityType>
+  <Association Name="FK_NewsTable_CategoryTable">
+    <End Type="news365Model.CategoryTable" Role="CategoryTable" Multiplicity="0..1" />
+    <End Type="news365Model.NewsTable" Role="NewsTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CategoryTable">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="NewsTable">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
